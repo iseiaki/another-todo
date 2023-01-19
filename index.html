@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Todo App</title>
+</head>
+<body>
+    <h1>Todo App</h1>
+
+    <form method="POST" action="/todos">
+        <input type="text" name="description" placeholder="New Todo">
+        <input type="submit" value="Add Todo">
+    </form>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Description</th>
+                <th>Completed</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{range .}}
+                <tr>
+                    <td>{{.ID}}</td>
+                    <td>{{.Description}}</td>
+                    <td>{{.Completed}}</td>
+                    <td>
+                        <form method="POST" action="/todos/{{.ID}}">
+                            <input type="hidden" name="_method" value="DELETE">
+                            <input type="submit" value="Delete">
+                        </form>
+                    </td>
+                </tr>
+            {{end}}
+        </tbody>
+    </table>
+</body>
+</html>
